@@ -1,0 +1,12 @@
+# Unnecessary files
+chom-services/
+chom-services.zip
+logo-b64.txt
+serve.ps1
+main.js
+style.css
+.claude/
+
+# OS files
+.DS_Store
+Thumbs.db
