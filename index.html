@@ -692,9 +692,9 @@ html{scroll-behavior:smooth}
     var img=document.querySelector('.cs-logo-svg');
     if(!img)return;
     function makeFav(){
-      var c=document.createElement('canvas');c.width=64;c.height=64;
+      var c=document.createElement('canvas');c.width=256;c.height=256;
       var ctx=c.getContext('2d');
-      ctx.beginPath();ctx.arc(32,32,32,0,Math.PI*2);ctx.clip();
+      ctx.beginPath();ctx.arc(128,128,128,0,Math.PI*2);ctx.clip();
       ctx.drawImage(img,0,0,64,64);
       var lk=document.querySelector('link[rel="icon"]');
       if(lk)lk.href=c.toDataURL('image/png');
