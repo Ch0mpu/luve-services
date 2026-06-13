@@ -687,5 +687,19 @@ html{scroll-behavior:smooth}
   var statObs=new IntersectionObserver(function(en){if(en[0].isIntersecting){runCounters();statObs.disconnect();}},{threshold:0.5});
   var statRow=document.querySelector('.cs-statrow');
   if(statRow)statObs.observe(statRow);
+  // Circular favicon from logo
+  (function(){
+    var img=document.querySelector('.cs-logo-svg');
+    if(!img)return;
+    function makeFav(){
+      var c=document.createElement('canvas');c.width=64;c.height=64;
+      var ctx=c.getContext('2d');
+      ctx.beginPath();ctx.arc(32,32,32,0,Math.PI*2);ctx.clip();
+      ctx.drawImage(img,0,0,64,64);
+      var lk=document.querySelector('link[rel="icon"]');
+      if(lk)lk.href=c.toDataURL('image/png');
+    }
+    if(img.complete)makeFav();else img.addEventListener('load',makeFav);
+  })();
 })();
 </script>
