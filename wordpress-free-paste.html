@@ -718,6 +718,13 @@ html{scroll-behavior:smooth}
   ham.addEventListener('click',function(){ham.classList.toggle('on');lnk.classList.toggle('on');if(ov)ov.classList.toggle('on');});
   lnk.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
   if(ov)ov.addEventListener('click',closeMenu);
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href');
+      var el=document.querySelector(id);
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});history.replaceState(null,'',window.location.pathname);}
+    });
+  });
   var els=document.querySelectorAll('.cs-card,.cs-pstep,.cs-pt,.cs-sh,.cs-stat,.cs-wcard,.cs-tcard,.cs-ctainner');
   els.forEach(function(e){e.classList.add('rv');});
   var ob=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vi');ob.unobserve(e.target);}});},{threshold:0.12});
