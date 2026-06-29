@@ -1,4 +1,5 @@
-﻿<link rel="icon" type="image/png" href="/luve-logo.png">
+﻿<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="/luve-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -137,8 +138,57 @@ html{scroll-behavior:smooth}
 @keyframes fu{to{opacity:1;transform:translateY(0)}}
 .rv{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}.rv.vi{opacity:1;transform:translateY(0)}
 @media(max-width:1024px){.cs-sgrid{grid-template-columns:repeat(2,1fr)}.cs-why{grid-template-columns:1fr;gap:60px}.cs-vis{display:none}.cs-pgrid{flex-wrap:wrap}.cs-pstep{min-width:200px}.cs-parr{display:none}.cs-cin{grid-template-columns:1fr;gap:48px}}
-@media(max-width:768px){.cs-links{position:fixed;top:0;right:-100%;height:100vh;width:280px;background:var(--dk2);flex-direction:column;align-items:flex-start;padding:100px 32px 40px;gap:24px;transition:right var(--tr);border-left:1px solid var(--bd);z-index:9998}.cs-links.on{right:0}.cs-links a{font-size:1.05rem}.cs-ham{display:flex;z-index:9999}.cs-sgrid{grid-template-columns:1fr}.cs-fin{grid-template-columns:1fr;gap:40px}.cs-fbi{flex-direction:column;gap:8px;text-align:center}.cs-fr{grid-template-columns:1fr}.cs-form{padding:28px 20px}.cs-pillars{gap:20px}.cs-pdiv{display:none}.cs-lang span.cs-lang-label{display:none}}
-@media(max-width:480px){.cs-sec{padding:72px 0}.cs-hcta{flex-direction:column;align-items:center}.cs-card{padding:36px 24px}}
+@media(max-width:768px){
+  .cs-wrap{padding:0 20px}
+  .cs-nav .cs-wrap{padding:0 20px}
+  /* Hamburger */
+  .cs-ham{display:flex;z-index:10000;min-height:44px;min-width:44px;justify-content:center;align-items:center}
+  /* Mobile nav panel */
+  .cs-links{position:fixed;top:0;right:-100%;height:100vh;width:min(300px,85vw);background:var(--dk2);flex-direction:column;align-items:flex-start;padding:88px 28px 48px;gap:4px;transition:right .3s ease;border-left:1px solid var(--bd);z-index:9999;overflow-y:auto}
+  .cs-links.on{right:0}
+  .cs-links a:not(.cs-navbtn){font-size:1.1rem;min-height:52px;display:flex;align-items:center;width:100%;border-bottom:1px solid rgba(255,255,255,.08)}
+  .cs-links .cs-navbtn{width:100%;text-align:center;justify-content:center;min-height:52px;margin-top:16px;font-size:1rem}
+  /* Tap overlay */
+  .cs-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9998;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+  .cs-ov.on{display:block}
+  /* Touch targets */
+  .cs-btn{min-height:48px}
+  .cs-lang{min-height:44px}
+  /* Sections */
+  .cs-sec{padding:72px 0}
+  /* Services */
+  .cs-sgrid{grid-template-columns:1fr}
+  /* Process — stack vertically */
+  .cs-pgrid{flex-direction:column;gap:12px}
+  .cs-pstep{width:100%;min-width:unset;padding:28px 24px}
+  .cs-parr{display:none}
+  /* Contact form */
+  .cs-cin{grid-template-columns:1fr;gap:40px}
+  .cs-fr{grid-template-columns:1fr}
+  .cs-form{padding:28px 20px}
+  .cs-fg input,.cs-fg select{font-size:16px;min-height:48px}
+  .cs-fg textarea{font-size:16px;min-height:120px}
+  /* Footer */
+  .cs-fin{grid-template-columns:1fr;gap:40px}
+  .cs-fbi{flex-direction:column;gap:8px;text-align:center}
+  /* Language btn */
+  .cs-lang span.cs-lang-label{display:none}
+  /* Misc */
+  .cs-pdiv{display:none}
+  .cs-pillars{gap:16px}
+}
+@media(max-width:480px){
+  .cs-wrap{padding:0 16px}
+  .cs-sec{padding:60px 0}
+  .cs-hero{padding:100px 0 64px}
+  .cs-hcta{flex-direction:column;align-items:stretch;gap:12px}
+  .cs-hcta .cs-btn{width:100%;justify-content:center}
+  .cs-card{padding:32px 20px}
+  .cs-pstep{padding:24px 16px}
+  .cs-ctabtns{flex-direction:column;align-items:stretch;gap:12px}
+  .cs-ctabtns .cs-btn{width:100%;justify-content:center;font-size:1rem;padding:16px}
+  .cs-line-btn{width:100%;justify-content:center}
+}
 .cs-hcon{max-width:none;text-align:left;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;position:relative;z-index:1}
 .cs-htxt .cs-hsub{margin:0 0 40px}.cs-htxt .cs-hcta{justify-content:flex-start}.cs-htxt .cs-pillars{justify-content:flex-start}
 .cs-hvis{position:relative;padding-left:16px}
@@ -471,6 +521,7 @@ html{scroll-behavior:smooth}
     </div>
   </div>
 </header>
+<div class="cs-ov" id="csOv"></div>
 
 <section class="cs-hero" id="cs-hero">
   <div class="cs-hbg"><div class="cs-blob cs-b1"></div><div class="cs-blob cs-b2"></div><div class="cs-grid"></div></div>
@@ -656,9 +707,11 @@ html{scroll-behavior:smooth}
   applyLang(lang);
   var nav=document.getElementById('csNav');
   window.addEventListener('scroll',function(){nav.classList.toggle('on',window.scrollY>40);});
-  var ham=document.getElementById('csHam'),lnk=document.getElementById('csLinks');
-  ham.addEventListener('click',function(){ham.classList.toggle('on');lnk.classList.toggle('on');});
-  lnk.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){ham.classList.remove('on');lnk.classList.remove('on');});});
+  var ham=document.getElementById('csHam'),lnk=document.getElementById('csLinks'),ov=document.getElementById('csOv');
+  function closeMenu(){ham.classList.remove('on');lnk.classList.remove('on');if(ov)ov.classList.remove('on');}
+  ham.addEventListener('click',function(){ham.classList.toggle('on');lnk.classList.toggle('on');if(ov)ov.classList.toggle('on');});
+  lnk.querySelectorAll('a').forEach(function(a){a.addEventListener('click',closeMenu);});
+  if(ov)ov.addEventListener('click',closeMenu);
   var els=document.querySelectorAll('.cs-card,.cs-pstep,.cs-pt,.cs-sh,.cs-stat,.cs-wcard,.cs-tcard,.cs-ctainner');
   els.forEach(function(e){e.classList.add('rv');});
   var ob=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vi');ob.unobserve(e.target);}});},{threshold:0.12});
