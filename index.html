@@ -21,6 +21,7 @@ html{scroll-behavior:smooth}
 .cs-lang{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:50px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:rgba(255,255,255,.85);font-size:.82rem;font-weight:600;cursor:pointer;transition:var(--tr);font-family:'Inter',sans-serif;white-space:nowrap}
 .cs-lang:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.45)}
 .cs-lang-flag{font-size:1rem;line-height:1}
+.cs-lang-mob{display:none;font-size:.9rem;font-weight:700}
 .cs-nav{position:fixed;top:0;left:0;right:0;z-index:9999;padding:20px 0;transition:var(--tr)}.cs-nav .cs-wrap{max-width:none;padding:0 40px}
 .cs-nav.on{background:rgba(10,10,20,.92);backdrop-filter:blur(20px);padding:14px 0;border-bottom:1px solid var(--bd)}
 .cs-nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -173,6 +174,8 @@ html{scroll-behavior:smooth}
   .cs-fbi{flex-direction:column;gap:8px;text-align:center}
   /* Language btn */
   .cs-lang span.cs-lang-label{display:none}
+  .cs-lang-flag{display:none}
+  .cs-lang-mob{display:inline}
   /* Misc */
   .cs-pdiv{display:none}
   .cs-pillars{gap:16px}
@@ -516,6 +519,7 @@ html{scroll-behavior:smooth}
       <button class="cs-lang" id="csLangBtn" title="Switch language">
         <span class="cs-lang-flag">🇹🇭</span>
         <span class="cs-lang-label" data-key="lang-label">ภาษาไทย</span>
+        <span class="cs-lang-mob">ไทย</span>
       </button>
       <button class="cs-ham" id="csHam" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
@@ -701,6 +705,8 @@ html{scroll-behavior:smooth}
     if(btn&&!btn.disabled)btn.textContent=T[l]['form-btn'];
     var flag=document.querySelector('.cs-lang-flag');
     if(flag)flag.textContent=l==='th'?'EN':'🇹🇭';
+    var mob=document.querySelector('.cs-lang-mob');
+    if(mob)mob.textContent=l==='th'?'EN':'ไทย';
   }
   var langBtn=document.getElementById('csLangBtn');
   if(langBtn){langBtn.addEventListener('click',function(){lang=lang==='en'?'th':'en';applyLang(lang);});}
