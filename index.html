@@ -667,7 +667,34 @@ html{scroll-behavior:smooth}
   document.querySelectorAll('.cs-fq').forEach(function(btn){btn.addEventListener('click',function(){var open=btn.getAttribute('aria-expanded')==='true';document.querySelectorAll('.cs-fq').forEach(function(b){b.setAttribute('aria-expanded','false');b.nextElementSibling.classList.remove('open');});if(!open){btn.setAttribute('aria-expanded','true');btn.nextElementSibling.classList.add('open');}});});
   var stt=document.getElementById('csStt');if(stt){window.addEventListener('scroll',function(){stt.classList.toggle('vi',window.scrollY>400);});stt.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});}
   var form=document.getElementById('csForm'),ok=document.getElementById('csOk');
-  if(form){form.addEventListener('submit',function(e){e.preventDefault();var btn=document.getElementById('csSubmitBtn');btn.textContent=lang==='th'?'กำลังส่ง…':'Sending…';btn.disabled=true;setTimeout(function(){form.reset();ok.classList.add('show');btn.textContent=T[lang]['form-btn'];btn.disabled=false;setTimeout(function(){ok.classList.remove('show');},6000);},1200);});}
+  if(form){form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=document.getElementById('csSubmitBtn');
+    btn.textContent=lang==='th'?'กำลังส่ง…':'Sending…';
+    btn.disabled=true;
+    var data=new FormData(form);
+    data.append('access_key','4d26bfbb-24a7-41d4-8318-b49f8606beca');
+    data.append('subject','New Enquiry — Luve Services Website');
+    data.append('from_name','Luve Services Website');
+    fetch('https://api.web3forms.com/submit',{method:'POST',body:data})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d.success){
+          form.reset();
+          ok.classList.add('show');
+          btn.textContent=T[lang]['form-btn'];
+          btn.disabled=false;
+          setTimeout(function(){ok.classList.remove('show');},6000);
+        } else {
+          btn.textContent='Error — Try Again';
+          btn.disabled=false;
+        }
+      })
+      .catch(function(){
+        btn.textContent='Error — Try Again';
+        btn.disabled=false;
+      });
+  });}
   var hbg=document.querySelector('.cs-hbg');
   if(hbg){for(var si=0;si<60;si++){var sp=document.createElement('div');sp.className='cs-sp';var dur=(1.5+Math.random()*2.5).toFixed(1)+'s';var del=(Math.random()*4).toFixed(1)+'s';sp.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;animation:twinkle '+dur+' '+del+' ease-in-out infinite';hbg.appendChild(sp);}}
   document.querySelectorAll('.cs-card').forEach(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect();var rx=((e.clientY-r.top-r.height/2)/r.height)*-10;var ry=((e.clientX-r.left-r.width/2)/r.width)*10;card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateY(-6px)';});card.addEventListener('mouseleave',function(){card.style.transform='';card.style.transition='transform .4s ease';setTimeout(function(){card.style.transition='';},400);});});
