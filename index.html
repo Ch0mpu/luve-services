@@ -172,6 +172,8 @@ html{scroll-behavior:smooth}
   .cs-sec{padding:72px 0}
   /* Services */
   .cs-sgrid{grid-template-columns:1fr}
+  /* Thai hero heading — extra line spacing for tone marks */
+  .cs-th .cs-hero h1{line-height:1.6}
   /* Process — stack vertically */
   .cs-pgrid{flex-direction:column;gap:12px}
   .cs-pstep{width:100%;min-width:unset;padding:28px 24px}
@@ -720,6 +722,8 @@ html{scroll-behavior:smooth}
     if(flag)flag.textContent=l==='th'?'EN':'🇹🇭';
     var mob=document.querySelector('.cs-lang-mob');
     if(mob)mob.textContent=l==='th'?'EN':'ไทย';
+    var cs=document.querySelector('.cs');
+    if(cs)cs.classList.toggle('cs-th',l==='th');
   }
   var langBtn=document.getElementById('csLangBtn');
   if(langBtn){langBtn.addEventListener('click',function(){lang=lang==='en'?'th':'en';applyLang(lang);});}
