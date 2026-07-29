@@ -1,0 +1,23 @@
+{
+  "name": "luve-services",
+  "version": "1.0.0",
+  "description": "Luve Services - Web Design Studio",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ch0mpu/luve-services.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ch0mpu/luve-services/issues"
+  },
+  "homepage": "https://github.com/Ch0mpu/luve-services#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
